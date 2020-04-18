@@ -8,6 +8,7 @@
 Class Change
 {
     private $cents;
+    private $centsAmount;
     private $fiveCoin;
     private $tenCoin;
     private $twentyCoin;
@@ -38,7 +39,7 @@ Class Change
     {
         $valid = true;
 
-        if(!($this->cents % 5))
+        if($this->cents > 0 && !($this->cents % 5))
         {
             while($this->cents >= 50)
             {
@@ -121,7 +122,7 @@ Class Change
         }
         else
         {
-            echo 'Amount must be a multiple of 5.';
+            echo 'Amount must be greater than 0 and a multiple of 5.';
         }
     }
 }
