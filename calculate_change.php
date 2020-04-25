@@ -132,9 +132,12 @@ Class Change
         date_default_timezone_set("Australia/Perth");
         $todayDate = date("d/m/Y H:i:s");
 
+        $receiptNo = date("YmdHis") . rand(0,9);
+
         $receiptFile = fopen("receipt.txt", "w+");
 
-        $saveText = "Date: " . $todayDate 
+        $saveText = "Receipt No. " .$receiptNo
+                    . "\nDate: " . $todayDate
                     . "\n\nChange given for $this->centsAmount cents.\n\n" 
                     . $this->fiftyCoin .' - 50c coins.'
                     ."\n" .$this->twentyCoin .' - 20c coins.'
