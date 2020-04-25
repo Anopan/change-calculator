@@ -2,7 +2,7 @@
 /*
     Author:         Anopan Kandiah
     Date Created:   18/04/2020
-    Date Modified:  18/04/2020
+    Date Modified:  25/04/2020
 */
 
 Class Change
@@ -119,11 +119,31 @@ Class Change
                 echo $this->fiveCoin .' - 5c coins.<br>';
             }
 
+            $this->printReceipt();
         }
         else
         {
             echo 'Amount must be greater than 0 and a multiple of 5.';
         }
+    }
+
+    private function printReceipt()
+    {
+        date_default_timezone_set("Australia/Perth");
+        $todayDate = date("d/m/Y H:i:s");
+
+        $receiptFile = fopen("receipt.txt", "w+");
+
+        $saveText = "Date: " . $todayDate 
+                    . "\n\nChange given for $this->centsAmount cents.\n\n" 
+                    . $this->fiftyCoin .' - 50c coins.'
+                    ."\n" .$this->twentyCoin .' - 20c coins.'
+                    ."\n" .$this->tenCoin .' - 10c coins.'
+                    ."\n" .$this->fiveCoin .' - 5c coins.';
+
+        fwrite($receiptFile, $saveText);
+
+        fclose($receiptFile);
     }
 }
 
