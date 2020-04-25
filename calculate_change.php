@@ -13,6 +13,8 @@ Class Change
     private $tenCoin;
     private $twentyCoin;
     private $fiftyCoin;
+    private $oneCoin;
+    private $twoCoin;
 
     public function __construct()
     {
@@ -22,6 +24,8 @@ Class Change
         $this->tenCoin = 0;
         $this->twentyCoin = 0;
         $this->fiftyCoin = 0;
+        $this->oneCoin = 0;
+        $this->twoCoin = 0;
     }
 
     public function set_Cents($c)
@@ -41,6 +45,18 @@ Class Change
 
         if($this->cents > 0 && !($this->cents % 5))
         {
+            while ($this->cents >= 200)
+            {
+                $this->cents = $this->cents - 200;
+                $this->twoCoin++;
+            }
+
+            while ($this->cents >= 100)
+            {
+                $this->cents = $this->cents - 100;
+                $this->oneCoin++;
+            }
+
             while($this->cents >= 50)
             {
                 $this->cents = $this->cents - 50;
@@ -78,6 +94,26 @@ Class Change
         if($this->calculateChange())
         {
             echo 'Change given for ' .$this->centsAmount .' cents will consist of:<br><br>';
+
+            if($this->twoCoin == 1)
+            {
+                echo $this->twoCoin .' - $2 coin.<br>';
+            }
+
+            if($this->twoCoin > 1)
+            {
+                echo $this->twoCoin .' - $2 coins.<br>';
+            }
+
+            if($this->oneCoin == 1)
+            {
+                echo $this->oneCoin .' - $1 coin.<br>';
+            }
+
+            if($this->oneCoin > 1)
+            {
+                echo $this->oneCoin .' - $1 coins.<br>';
+            }
 
             if($this->fiftyCoin == 1)
             {
@@ -139,7 +175,9 @@ Class Change
         $saveText = "Receipt No. " .$receiptNo
                     . "\nDate: " . $todayDate
                     . "\n\nChange given for $this->centsAmount cents.\n\n" 
-                    . $this->fiftyCoin .' - 50c coins.'
+                    .$this->twoCoin .' - $2 coins.'
+                    ."\n" .$this->oneCoin .' - $1 coins.'
+                    ."\n" .$this->fiftyCoin .' - 50c coins.'
                     ."\n" .$this->twentyCoin .' - 20c coins.'
                     ."\n" .$this->tenCoin .' - 10c coins.'
                     ."\n" .$this->fiveCoin .' - 5c coins.';
