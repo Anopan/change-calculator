@@ -2,7 +2,7 @@
 /*
     Author:         Anopan Kandiah
     Date Created:   18/04/2020
-    Date Modified:  25/04/2020
+    Date Modified:  02/05/2020
 */
 
 Class Change
@@ -174,13 +174,37 @@ Class Change
 
         $saveText = "Receipt No. " .$receiptNo
                     . "\nDate: " . $todayDate
-                    . "\n\nChange given for $this->centsAmount cents.\n\n" 
-                    .$this->twoCoin .' - $2 coins.'
-                    ."\n" .$this->oneCoin .' - $1 coins.'
-                    ."\n" .$this->fiftyCoin .' - 50c coins.'
-                    ."\n" .$this->twentyCoin .' - 20c coins.'
-                    ."\n" .$this->tenCoin .' - 10c coins.'
-                    ."\n" .$this->fiveCoin .' - 5c coins.';
+                    . "\n\nChange given for $this->centsAmount cents.\n"; 
+        
+        if($this->twoCoin > 0)
+        {
+            $saveText .= "\n" .$this->twoCoin .' - $2 coins.';
+        }
+        
+        if($this->oneCoin > 0)
+        {
+            $saveText .= "\n" .$this->oneCoin .' - $1 coins.';
+        }
+        
+        if($this->fiftyCoin > 0)
+        {
+            $saveText .= "\n" .$this->fiftyCoin .' - 50c coins.';
+        }
+                    
+        if($this->twentyCoin > 0)
+        {
+            $saveText .= "\n" .$this->twentyCoin .' - 20c coins.';
+        }
+
+        if($this->tenCoin > 0)
+        {
+            $saveText .= "\n" .$this->tenCoin .' - 10c coins.';
+        }            
+
+        if($this->fiveCoin)
+        {
+            $saveText .= "\n" .$this->fiveCoin .' - 5c coins.';
+        }
 
         fwrite($receiptFile, $saveText);
 
